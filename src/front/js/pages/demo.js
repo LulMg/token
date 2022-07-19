@@ -3,39 +3,107 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const Demo = () => {
-	const { store, actions } = useContext(Context);
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
 
-	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
-		</div>
-	);
+export const Demo = () => {
+  const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rPassword, setRpassword] = useState("");
+  const [uName, setUname] = useState("");
+
+  return (
+    <div className="container mt-4">
+      <h1 className="display-4 text-center text-light fw-bold">
+        Personal data record
+      </h1>
+      <div className="bg-dark bg-opacity-50 mt-5 p-4 mb-4 text-light">
+        <form className="mt-3 px-5" onSubmit={handleSubmit}>
+          <div className="form-group my-2">
+            <label>Email address</label>
+            <input
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              type="email"
+              className="form-control my-2"
+              placeholder="something@something_else.com"
+            />
+            <small id="emailHelp" className="form-text text-dark">
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+          <div className="form-group d-flex">
+            <div className="col-6">
+              <label>Name</label>
+              <input
+                onChange={(e) => {
+                  setUname(e.target.value);
+                }}
+                type="text"
+                className="form-control my-2"
+                id="text"
+                placeholder="Name"
+              />
+            </div>
+            <div className="col ms-4">
+              <label>Age</label>
+              <input
+                type={"number"}
+                min={"13"}
+                max={"100"}
+                className="form-control my-2"
+                id="int"
+                placeholder="Your age"
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              type={"password"}
+              className="form-control my-2"
+              id="Password"
+              placeholder="Password"
+            />
+          </div>
+          <div className="form-group">
+            <label>Repeat password</label>
+            <input
+              onChange={(e) => {
+                setRpassword(e.target.value);
+              }}
+              type={"password"}
+              className="form-control my-2"
+              id="pss"
+              placeholder="Repeat your password"
+            />
+          </div>
+          <button
+            onClick={() => {
+              if (password == rPassword) {
+                actions.signup(uName, email, password);
+              } else {
+                alert("Las contraseñas no coinciden");
+              }
+            }}
+            type="submit"
+            className="btn btn-danger btn-lg mt-4 col-12"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div className="text-center">
+        <Link to="/">
+          <button className="btn btn-dark btn-lg">Click here to SIGN IN</button>
+        </Link>
+      </div>
+    </div>
+  );
 };

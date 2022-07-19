@@ -66,6 +66,7 @@ public/
 !.eslintrc
 !.env.example
 .now
+.env
 
 # backend stuff
 .venv

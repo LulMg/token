@@ -5,3 +5,13 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+body {
+  background-image: url("https://1.bp.blogspot.com/-o71Z4z3boYU/YKbo_1SYuoI/AAAAAAABNIM/VbBC51KRifsXVY1iMv4qfdN_SZnwVp2AQCLcBGAsYHQ/w0/lake-from-dreamy-mountains-5k-eu-2560x1440.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#caja {
+  margin-top: 140px;
+}
